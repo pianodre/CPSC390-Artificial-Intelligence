@@ -59,3 +59,7 @@ Average generations to solve: 62
 Best: 19 Worst: 238
 
 Which is a 37% improvement over the original algorithm with the same mutation rate and run count.
+
+
+If we ever increase the target string, we will need to decrease the mutation rate, 
+as a higher mutation rate will likely lead to more random changes and less convergence towards the target string.

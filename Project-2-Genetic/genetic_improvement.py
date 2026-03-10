@@ -7,7 +7,7 @@ MUTATION_RATE = 0.09
 ELITE_COUNT = 4
 ASCII_START = ord(' ')
 ASCII_END = ord('z')
-RUN_COUNT = 500
+RUN_COUNT = 200
 
 def generate_character():
     return chr(random.randint(ASCII_START, ASCII_END))
@@ -64,7 +64,8 @@ def run_genetic_algorithm():
         
 
         # Print the best fitness every 10 generations
-        # printEveryTen(generation, initial_population)
+        if RUN_COUNT == 1:
+            printEveryTen(generation, initial_population)
 
         # Create children until we have enough to fill the population
         while len(children) < POPULATION_SIZE - ELITE_COUNT:
