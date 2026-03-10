@@ -1,5 +1,14 @@
-.rtf
-.txt
-.pdf
-/Slides
-.docx
+# Ignore everything by default
+*
+
+# Keep git metadata
+!.gitignore
+
+# Keep only these projects
+!Project-1-Search/
+!Project-1-Search/**
+!Project-2-Genetic/
+!Project-2-Genetic/**
+
+# OS cruft
+.DS_Store
