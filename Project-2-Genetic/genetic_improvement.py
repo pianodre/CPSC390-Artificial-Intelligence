@@ -1,5 +1,5 @@
-
 import random
+import matplotlib.pyplot as plt
 
 TARGET = "Hello CPSC 390!"
 POPULATION_SIZE = 128
@@ -7,7 +7,7 @@ MUTATION_RATE = 0.09
 ELITE_COUNT = 4
 ASCII_START = ord(' ')
 ASCII_END = ord('z')
-RUN_COUNT = 200
+RUN_COUNT = 1
 
 def generate_character():
     return chr(random.randint(ASCII_START, ASCII_END))
@@ -49,14 +49,31 @@ def printEveryTen(generation, population):
     if generation % 10 == 0 or generation == 1:
         print("Generation: " + str(generation) + " Best fitness: " + str(fitness(population[0])))
 
+def plot_best_fitness_per_generation(best_fitness_history):
+    generations = list(range(1, len(best_fitness_history) + 1))
+
+    plt.figure(figsize=(9, 5))
+    plt.plot(generations, best_fitness_history, color="teal", linewidth=2)
+    plt.xscale("log")
+    plt.title("Best Fitness per Generation")
+    plt.xlabel("Generation (log scale)")
+    plt.ylabel("Best Fitness Score")
+    plt.grid(True, alpha=0.3)
+    plt.tight_layout()
+    plt.show()
+
 
 def run_genetic_algorithm():
     solved = False
     generation = 0
     initial_population = generate_population()
+    best_fitness_history = []
 
     while not solved:
         generation += 1
+        best_individual = max(initial_population, key=fitness)
+        best_fitness_score = fitness(best_individual)
+        best_fitness_history.append(best_fitness_score)
 
         parents = select_parents(initial_population)
         elite = parents[:ELITE_COUNT]
@@ -84,10 +101,13 @@ def run_genetic_algorithm():
         for individual in initial_population:
             if fitness(individual) == len(TARGET):
                 print("Solution found: " + individual)
-                print("Generation: " + str(generation))
+                print("Generation: " + str(generation) + "\n")
                 solved = True
                 break
     
+    if RUN_COUNT == 1:
+        plot_best_fitness_per_generation(best_fitness_history)
+
     return generation
 
 if __name__ == "__main__":
@@ -97,10 +117,7 @@ if __name__ == "__main__":
         generation_count.append(run_genetic_algorithm())
     generation_count.sort()
 
-    print()
-
     print("Average generations to solve: " + str(sum(generation_count) // len(generation_count)))
     print("Best: " + str(generation_count[0]) + " Worst: " + str(generation_count[-1]))
 
     print()
-

@@ -7,8 +7,13 @@
 # Keep only these projects
 !Project-1-Search/
 !Project-1-Search/**
+
+# Allow only Python and notebooks from Project-2-Genetic
 !Project-2-Genetic/
-!Project-2-Genetic/**
+Project-2-Genetic/**
+!Project-2-Genetic/**/
+!Project-2-Genetic/**/*.py
+!Project-2-Genetic/**/*.ipynb
 
 # OS cruft
 .DS_Store
