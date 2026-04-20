@@ -15,5 +15,8 @@ Project-2-Genetic/**
 !Project-2-Genetic/**/*.py
 !Project-2-Genetic/**/*.ipynb
 
+!Project-3-Spam/
+!Project-3-Spam/**
+
 # OS cruft
 .DS_Store
